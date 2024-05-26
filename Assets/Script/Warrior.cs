@@ -5,16 +5,16 @@ using UnityEngine;
 public class Warrior : Player
 {
 
-    public Warrior(int health, int power, string name)
-    {
-        Health = health;
-        Power = power;
-        Name = name;
-    }
+    //public Warrior(int health, int power, string name)
+    //{
+    //    Health = health;
+    //    Power = power;
+    //    Name = name;
+    //}
 
-    public override void Attack() {
-        Debug.Log("Warrior is attacking with AXE");
-    }
+    //public override void Attack() {
+    //    Debug.Log("Warrior is attacking with AXE");
+    //}
 
 
 } // class

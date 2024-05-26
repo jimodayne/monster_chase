@@ -2,78 +2,117 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player
+public class Player : MonoBehaviour
 {
 
-    private int _health;
+    [SerializeField]
+    private float moveForce = 10f;
 
-    public int Health
+    [SerializeField]
+    private float jumpForce = 11f;
+
+    private float movementX;
+
+    private Rigidbody2D myBody;
+
+    private SpriteRenderer sr;
+
+    private Animator anim;
+
+    private string WALK_ANIMATION = "Walk";
+    private string GROUND_TAG = "Ground";
+    private string ENEMY_TAG = "Enemy";
+
+    private bool isGrounded;
+
+
+    private void Awake()
     {
-        get {
-            return _health;
-        }
 
-        set {
-            _health = value;
-        }
+        myBody = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
+
     }
 
-    private int _power;
-
-    public int Power
+    // Start is called before the first frame update
+    void Start()
     {
-        get
-        {
-            return _power;
-        }
 
-        set
-        {
-            _power = value;
-        }
     }
 
-    private string _name;
-
-    public string Name
+    // Update is called once per frame
+    void Update()
     {
-        get
+        PlayerMoveKeyboard();
+        AnimatePlayer();
+    }
+
+    private void FixedUpdate()
+    {
+        PlayerJump();
+    }
+
+    void PlayerMoveKeyboard()
+    {
+
+        movementX = Input.GetAxisRaw("Horizontal");
+
+        transform.position += new Vector3(movementX, 0f, 0f) * moveForce * Time.deltaTime;
+
+    }
+
+    void Attack() { }
+
+    void AnimatePlayer()
+    {
+
+        // we are going to the right side
+        if (movementX > 0)
         {
-            return _name;
+            anim.SetBool(WALK_ANIMATION, true);
+            sr.flipX = false;
+        }
+        else if (movementX < 0)
+        {
+            // we are going to the left side
+            anim.SetBool(WALK_ANIMATION, true);
+            sr.flipX = true;
+        }
+        else
+        {
+            anim.SetBool(WALK_ANIMATION, false);
         }
 
-        set
+    }
+
+    void PlayerJump()
+    {
+
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            _name = value;
+            isGrounded = false;
+            myBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
         }
     }
 
-    public Player() { }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
 
-    public Player(int health, int power, string name) {
+        if (collision.gameObject.CompareTag(GROUND_TAG))
+            isGrounded = true;
 
-        Health = health;
-        Power = power;
-        Name = name;
+
+        if (collision.gameObject.CompareTag(ENEMY_TAG))
+            Destroy(gameObject);
+
+
     }
 
-    public virtual void Attack() {
-        Debug.Log("Player is attacking with fire");
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(ENEMY_TAG))
+            Destroy(gameObject);
     }
-
-    public void Info() {
-        Debug.Log("Health is: " + Health);
-        Debug.Log("Power is: " + Power);
-        Debug.Log("Name is: " + Name);
-    }
-
-    //public void SetHealth(int health) {
-    //    this.health = health;
-    //}
-
-    //public int GetHealth() {
-    //    return health;
-    //}
-
 
 } // class
