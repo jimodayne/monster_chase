@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     private float moveForce = 10f;
 
     [SerializeField]
-    private float jumpForce = 11f;
+    private float jumpForce = 12f;
 
     private float movementX;
 
@@ -46,11 +46,12 @@ public class Player : MonoBehaviour
     {
         PlayerMoveKeyboard();
         AnimatePlayer();
+        PlayerJump();
     }
 
     private void FixedUpdate()
     {
-        PlayerJump();
+        //PlayerJump();
     }
 
     void PlayerMoveKeyboard()
@@ -89,9 +90,12 @@ public class Player : MonoBehaviour
     void PlayerJump()
     {
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            isGrounded = false;
+        //if (Input.GetButtonDown("Jump") && isGrounded)
+        //{
+        //    isGrounded = false;
+        //    myBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+        //}
+        if (Input.GetButtonDown("Jump")) {
             myBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
         }
     }
