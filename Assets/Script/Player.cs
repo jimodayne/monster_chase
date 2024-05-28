@@ -89,13 +89,9 @@ public class Player : MonoBehaviour
 
     void PlayerJump()
     {
-
-        //if (Input.GetButtonDown("Jump") && isGrounded)
-        //{
-        //    isGrounded = false;
-        //    myBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
-        //}
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            isGrounded = false;
             myBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
         }
     }
