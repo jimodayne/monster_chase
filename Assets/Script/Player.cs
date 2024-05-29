@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
 
     private float movementX;
 
+    public static bool isDestroyed = false;
+
+
     private Rigidbody2D myBody;
 
     private SpriteRenderer sr;
@@ -38,7 +41,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+       
     }
 
     // Update is called once per frame
@@ -52,6 +55,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         //PlayerJump();
+      
     }
 
     void PlayerMoveKeyboard()
@@ -113,6 +117,11 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag(ENEMY_TAG))
             Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        isDestroyed = true;
     }
 
 } // class

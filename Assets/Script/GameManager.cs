@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
     private int _charIdx;
+    public int numberOfPlayer = 0;
     public int CharIdx
     {
         get { return _charIdx; }
@@ -29,6 +30,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
@@ -44,6 +47,11 @@ public class GameManager : MonoBehaviour
 
         if (scene.name == "Gameplay")
         {
+            // Remove existing player
+            if (GameObject.FindGameObjectWithTag("Player") != null)
+            {
+                Destroy(GameObject.FindGameObjectWithTag("Player"));
+            }
             Instantiate(characters[CharIdx]);
         }
 
