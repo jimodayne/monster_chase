@@ -46,7 +46,10 @@ public class GamePlayUI : MonoBehaviour
     public void ResetUI( )
     {
         Player.isDestroyed = false;
-        gameOverText.text = "";
+        if (gameOverText)
+        {
+            gameOverText.text = "";
+        }
     }
 
     public string RenderTimeTwoDecimals(float time)
