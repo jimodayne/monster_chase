@@ -2,7 +2,11 @@
 
 Monster Chase is a 2D mobile game built in Unity, where your reflexes are put to the test.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Qk9ESe906qE?si=JHtaIMiYomWIDLeS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<div align="left">
+      <a href="https://www.youtube.com/watch?v=Qk9ESe906qE">
+         <img src="https://img.youtube.com/vi/Qk9ESe906qE/0.jpg" style="width:100%;">
+      </a>
+</div>
 
 ## Gameplay
 
